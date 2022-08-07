@@ -1,8 +1,9 @@
 body {
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
+  width: 100%;
+  margin: 0px;
 }
-/*
 
 h1,
 h2,
@@ -27,4 +28,4 @@ button {
 
 img {
   display: block;
-} */
+}
