@@ -28,7 +28,10 @@ export const Conteiner = styled.div`
   }
 `;
 
-export const LogoLink = styled.a``;
+export const LogoLink = styled.a`
+  display: flex;
+  align-items: flex-end;
+`;
 
 export const NavBtns = styled.div`
   display: flex;
