@@ -4,6 +4,15 @@ import { TeamList } from '../../components/TeamList/TeamList';
 import { Footer } from '../../components/Footer/Footer';
 
 export const HomePage = () => {
+  const submitForm = (values, resetForm) => {
+    const photo = values.photo;
+
+    let formData = new FormData();
+    formData.append('file', photo, 'imageName');
+    console.log(formData);
+    // resetForm();
+  };
+
   return (
     <>
       <Header />
@@ -11,7 +20,7 @@ export const HomePage = () => {
         <Hero />
         <TeamList />
       </main>
-      <Footer />
+      <Footer onSubmitForm={submitForm} />
     </>
   );
 };

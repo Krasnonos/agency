@@ -26,3 +26,11 @@ export const Conteiner = styled.div`
     padding-right: 322px;
   }
 `;
+
+export const Title = styled.h2`
+  text-align: center;
+  color: ${p => p.theme.colors.mainText};
+  font-size: ${p => p.theme.fontSizes.m};
+  font-weight: ${p => p.theme.fontWeights.normal};
+  line-height: 1;
+`;
