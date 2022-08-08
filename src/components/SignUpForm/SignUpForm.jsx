@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { getToken } from '../../utils/getToken';
 import { postUser } from '../../utils/postUser';
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ setIsNewUser }) => {
   const createPostBody = async (
     { email, name, phone, position },
     resetForm
@@ -25,7 +25,10 @@ export const SignUpForm = () => {
 
     const { token } = await getToken();
     const isSuccess = await postUser(formData, token);
-    console.log(isSuccess);
+    if (isSuccess) {
+      setIsNewUser(true);
+    }
+    resetForm();
   };
 
   return (

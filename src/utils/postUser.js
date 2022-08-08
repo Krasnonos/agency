@@ -14,6 +14,7 @@ export const postUser = (formData, token) => {
       } else {
         toast(data.message);
       }
+      return data;
     })
     .catch(err => toast('invalid values'));
 };

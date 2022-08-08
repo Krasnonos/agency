@@ -1,4 +1,3 @@
-import mobImg from '../../images/hero-mob.jpg';
 import {
   Item,
   ImgWrap,
@@ -7,17 +6,18 @@ import {
   MemberName,
 } from './TeamListItem.styled';
 
-export const TeamListItem = () => {
+export const TeamListItem = ({ user }) => {
+  const { name, email, phone, position, photo } = user;
   return (
     <Item>
       <ImgWrap>
-        <Img src={mobImg} alt="Takamaru Ayako Jurrien" />
+        <Img src={photo} alt={name} />
       </ImgWrap>
       <DescrBlock>
-        <MemberName>Takamaru Ayako Jurrien</MemberName>
-        <p>Lead Independent Director </p>
-        <p>Takamuru@gmail.com</p>
-        <p>+38 (098) 278 90 24</p>
+        <MemberName>{name}</MemberName>
+        <p>{position}</p>
+        <p>{email}</p>
+        <p>{phone}</p>
       </DescrBlock>
     </Item>
   );

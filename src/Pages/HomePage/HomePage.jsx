@@ -4,16 +4,18 @@ import { TeamList } from '../../components/TeamList/TeamList';
 import { Footer } from '../../components/Footer/Footer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 
 export const HomePage = () => {
+  const [isNewUser, setIsNewUser] = useState(false);
   return (
     <>
       <Header />
       <main>
         <Hero />
-        <TeamList />
+        <TeamList isNewUser={isNewUser} />
       </main>
-      <Footer />
+      <Footer setIsNewUser={setIsNewUser} />
       <ToastContainer autoClose={2000} pauseOnHover />
     </>
   );
