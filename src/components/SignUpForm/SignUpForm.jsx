@@ -1,17 +1,44 @@
 import { Formik, Form, Field } from 'formik';
+import { toast } from 'react-toastify';
+import { getToken } from '../../utils/getToken';
+import { postUser } from '../../utils/postUser';
 
-export const SignUpForm = ({ onSubmitForm }) => {
+export const SignUpForm = () => {
+  const createPostBody = async (
+    { email, name, phone, position },
+    resetForm
+  ) => {
+    const inputFile = document.querySelector('input[type="file"]');
+    const file = inputFile.files[0];
+
+    if (file.size > 5000000) {
+      toast('to large image');
+      return;
+    }
+
+    let formData = new FormData();
+    formData.append('position_id', position);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('photo', file);
+
+    const { token } = await getToken();
+    const isSuccess = await postUser(formData, token);
+    console.log(isSuccess);
+  };
+
   return (
     <Formik
       initialValues={{
         email: '',
         name: '',
         phone: '',
-        position: 'frontend developer',
+        position: '1',
         photo: '',
       }}
       onSubmit={(values, { resetForm }) => {
-        onSubmitForm(values, resetForm);
+        createPostBody(values, resetForm);
       }}
     >
       <Form>
@@ -35,24 +62,13 @@ export const SignUpForm = ({ onSubmitForm }) => {
           +38 (XXX) XXX - XX - XX
         </label>
         <p>Select your position</p>
-        <Field
-          type="radio"
-          name="position"
-          value="frontend developer"
-          id="frontend developer"
-          checked
-        />
+        <Field type="radio" name="position" value="1" id="frontend developer" />
         <label htmlFor="frontend developer">Frontend developer</label>
-        <Field
-          type="radio"
-          name="position"
-          value="backend developer"
-          id="backend developer"
-        />
+        <Field type="radio" name="position" value="2" id="backend developer" />
         <label htmlFor="backend developer">Backend developer</label>
-        <Field type="radio" name="position" value="designer" id="designer" />
+        <Field type="radio" name="position" value="3" id="designer" />
         <label htmlFor="designer">Designer</label>
-        <Field type="radio" name="position" value="qa" id="qa" />
+        <Field type="radio" name="position" value="4" id="qa" />
         <label htmlFor="qa">QA</label>
 
         <label>
