@@ -3,7 +3,7 @@ import { TeamListItem } from '../TeamListItem/TeamListItem';
 import { Section, Conteiner, Title, List, Btn } from './TeamList.styled';
 import { getUsers } from '../../utils/getUsers';
 
-export const TeamList = ({ isNewUser }) => {
+export const TeamList = ({ isNewUser, setIsNewUser }) => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [isShowMore, setIsShowMore] = useState(true);
@@ -19,6 +19,11 @@ export const TeamList = ({ isNewUser }) => {
 
   if (!users.length === 0) {
     return;
+  }
+
+  if (isNewUser) {
+    getUsers(1).then(res => setUsers(res.users));
+    setIsNewUser(false);
   }
 
   return (

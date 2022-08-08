@@ -13,7 +13,7 @@ export const HomePage = () => {
       <Header />
       <main>
         <Hero />
-        <TeamList isNewUser={isNewUser} />
+        <TeamList isNewUser={isNewUser} setIsNewUser={setIsNewUser} />
       </main>
       <Footer setIsNewUser={setIsNewUser} />
       <ToastContainer autoClose={2000} pauseOnHover />
