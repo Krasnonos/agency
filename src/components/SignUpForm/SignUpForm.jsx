@@ -3,7 +3,7 @@ import { Button } from '../Button/Button';
 import { getToken } from '../../utils/getToken';
 import { postUser } from '../../utils/postUser';
 import { getPosition } from '../../utils/getPosinions';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   From,
   Input,
@@ -25,6 +25,8 @@ export const SignUpForm = ({ setIsNewUser }) => {
   useEffect(() => {
     getPosition().then(setPositions);
   }, []);
+
+  const form = useRef(null);
 
   const createPostBody = async e => {
     e.preventDefault();
@@ -51,6 +53,10 @@ export const SignUpForm = ({ setIsNewUser }) => {
 
       if (success) {
         setIsNewUser(true);
+
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
         e.target.reset();
       }
     } catch (error) {
@@ -58,8 +64,30 @@ export const SignUpForm = ({ setIsNewUser }) => {
     }
   };
 
+  const makeSubmitBtnActive = e => {
+    const { email, name, phone, photo, position } = form.current.elements;
+    const values = [
+      email.value,
+      name.value,
+      phone.value,
+      photo.value,
+      position.value,
+    ];
+
+    const isEmpty = values.includes('');
+    const submitBtn = document.querySelector('button[type="submit"]');
+
+    if (isEmpty) {
+      submitBtn.disabled = true;
+    }
+
+    if (!isEmpty) {
+      submitBtn.disabled = false;
+    }
+  };
+
   return (
-    <From onSubmit={createPostBody}>
+    <From onSubmit={createPostBody} ref={form}>
       <Input
         type="text"
         name="name"
@@ -67,8 +95,15 @@ export const SignUpForm = ({ setIsNewUser }) => {
         required
         minLength="2"
         maxLength="60"
+        onChange={makeSubmitBtnActive}
       />
-      <Input type="email" name="email" placeholder="Email" required />
+      <Input
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+        onChange={makeSubmitBtnActive}
+      />
       <PhoneBox>
         <Input
           type="tel"
@@ -77,6 +112,7 @@ export const SignUpForm = ({ setIsNewUser }) => {
           placeholder="Phone"
           required
           pattern="^\+380\d{3}\d{2}\d{2}\d{2}$"
+          onChange={makeSubmitBtnActive}
         />
         <PhoneLabel htmlFor="phone">+38 (XXX) XXX-XX-XX</PhoneLabel>
       </PhoneBox>
@@ -84,7 +120,12 @@ export const SignUpForm = ({ setIsNewUser }) => {
       <RadiosWrap>
         {positions.map(({ id, name }) => (
           <Label key={id}>
-            <RadioInput type="radio" name="position" value={id} />
+            <RadioInput
+              type="radio"
+              name="position"
+              value={id}
+              onChange={makeSubmitBtnActive}
+            />
             <CheckMark></CheckMark>
             {name}
           </Label>
@@ -96,6 +137,7 @@ export const SignUpForm = ({ setIsNewUser }) => {
         id="fileElem"
         required
         accept="image/jpeg,image/jpg"
+        onChange={makeSubmitBtnActive}
       />
       <UploadLabel htmlFor="fileElem">
         <UploadSpan>Upload</UploadSpan>Upload your photo

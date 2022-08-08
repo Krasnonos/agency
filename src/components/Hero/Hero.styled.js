@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import mobImg from '../../images/hero-mob.jpg';
 import tablImg from '../../images/hero-tablet.jpg';
-import descImg from '../../images/hero-desc.png';
+import descImg from '../../images/hero-desc.jpg';
+import bigestImg from '../../images/hero-bigest.jpg';
 
 export const Section = styled.section`
   padding-top: 40px;
   padding-bottom: 71px;
+  background-color: ${p => p.theme.colors.background};
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${mobImg});
   background-repeat: no-repeat;
@@ -21,6 +23,11 @@ export const Section = styled.section`
     padding-bottom: 163px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
       url(${descImg});
+  }
+  @media screen and (min-width: 1170px) {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-image: none;
   }
 `;
 
@@ -42,6 +49,15 @@ export const Conteiner = styled.div`
     width: 1024px;
     padding-left: 322px;
     padding-right: 322px;
+  }
+  @media screen and (min-width: 1170px) {
+    width: 1170px;
+    padding-left: 395px;
+    padding-right: 395px;
+    padding-top: 164px;
+    padding-bottom: 163px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(${bigestImg});
   }
 `;
 

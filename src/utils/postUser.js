@@ -9,7 +9,6 @@ export const postUser = (formData, token) => {
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        toast('succses');
       } else {
         toast(data.message);
       }

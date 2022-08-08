@@ -26,6 +26,10 @@ export const Item = styled.li`
     width: 282px;
     min-height: 254px;
   }
+
+  @media screen and (min-width: 1170px) {
+    width: 370px;
+  }
 `;
 
 export const ImgWrap = styled.div`

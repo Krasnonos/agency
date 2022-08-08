@@ -26,6 +26,11 @@ export const Conteiner = styled.div`
     padding-left: 60px;
     padding-right: 60px;
   }
+  @media screen and (min-width: 1170px) {
+    width: 1170px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 `;
 
 export const Title = styled.h2`
