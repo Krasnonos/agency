@@ -8,13 +8,8 @@ export const TeamList = ({ isNewUser, setIsNewUser }) => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [isShowMore, setIsShowMore] = useState(true);
-  // const isFirsRender = useRef(true);
 
   useEffect(() => {
-    // if (isFirsRender.current) {
-    //   isFirsRender.current = false;
-    //   return;
-    // }
     try {
       getUsers(page).then(res => {
         setUsers(state => [...state, ...res.users]);
