@@ -22,13 +22,15 @@ export const TeamList = ({ isNewUser, setIsNewUser }) => {
     });
   }, [page]);
 
+  useEffect(() => {
+    if (isNewUser) {
+      getUsers(1).then(res => setUsers(res.users));
+      setIsNewUser(false);
+    }
+  }, [isNewUser, setIsNewUser]);
+
   if (!users.length === 0) {
     return;
-  }
-
-  if (isNewUser) {
-    getUsers(1).then(res => setUsers(res.users));
-    // setIsNewUser(false);
   }
 
   return (

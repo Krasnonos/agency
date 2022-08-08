@@ -31,8 +31,8 @@ export const SignUpForm = ({ setIsNewUser }) => {
     formData.append('photo', file);
 
     const { token } = await getToken();
-    const isSuccess = await postUser(formData, token);
-    if (isSuccess) {
+    const { success } = await postUser(formData, token);
+    if (success) {
       setIsNewUser(true);
       resetForm();
     }
