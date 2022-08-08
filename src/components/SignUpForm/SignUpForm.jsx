@@ -2,14 +2,14 @@ import { Formik, Form, Field } from 'formik';
 import { toast } from 'react-toastify';
 import { getToken } from '../../utils/getToken';
 import { postUser } from '../../utils/postUser';
-import { getPosition } from '../../utils/getPosinions';
-import { useState, useEffect } from 'react';
+// import { getPosition } from '../../utils/getPosinions';
+// import { useState, useEffect } from 'react';
 
 export const SignUpForm = ({ setIsNewUser }) => {
-  const [positions, setPositions] = useState([]);
-  useEffect(() => {
-    getPosition().then(setPositions);
-  }, []);
+  // const [positions, setPositions] = useState([]);
+  // useEffect(() => {
+  //   getPosition().then(setPositions);
+  // }, []);
 
   const createPostBody = async (
     { email, name, phone, position },
@@ -34,8 +34,8 @@ export const SignUpForm = ({ setIsNewUser }) => {
     const isSuccess = await postUser(formData, token);
     if (isSuccess) {
       setIsNewUser(true);
+      resetForm();
     }
-    resetForm();
   };
 
   return (
