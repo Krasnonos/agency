@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useState, useEffect, useRef } from 'react';
 import { TeamListItem } from '../TeamListItem/TeamListItem';
 import { Section, Conteiner, Title, List, Btn } from './TeamList.styled';
@@ -14,18 +15,26 @@ export const TeamList = ({ isNewUser, setIsNewUser }) => {
       isFirsRender.current = false;
       return;
     }
-    getUsers(page).then(res => {
-      setUsers(state => [...state, ...res.users]);
-      if (res.total_pages === res.page) {
-        setIsShowMore(false);
-      }
-    });
+    try {
+      getUsers(page).then(res => {
+        setUsers(state => [...state, ...res.users]);
+        if (res.total_pages === res.page) {
+          setIsShowMore(false);
+        }
+      });
+    } catch (error) {
+      toast(error.message);
+    }
   }, [page]);
 
   useEffect(() => {
     if (isNewUser) {
-      getUsers(1).then(res => setUsers(res.users));
-      setIsNewUser(false);
+      try {
+        getUsers(1).then(res => setUsers(res.users));
+        setIsNewUser(false);
+      } catch (error) {
+        toast(error.message);
+      }
     }
   }, [isNewUser, setIsNewUser]);
 

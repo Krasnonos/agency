@@ -29,11 +29,16 @@ export const SignUpForm = ({ setIsNewUser }) => {
     formData.append('phone', phone.value);
     formData.append('photo', file);
 
-    const { token } = await getToken();
-    const { success } = await postUser(formData, token);
-    if (success) {
-      setIsNewUser(true);
-      e.target.reset();
+    try {
+      const { token } = await getToken();
+      const { success } = await postUser(formData, token);
+
+      if (success) {
+        setIsNewUser(true);
+        e.target.reset();
+      }
+    } catch (error) {
+      toast(error.message);
     }
   };
 
