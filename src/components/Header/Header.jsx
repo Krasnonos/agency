@@ -12,7 +12,7 @@ export const Header = () => {
           </svg>
         </LogoLink>
         <NavBtns>
-          <Button disabled>Users</Button>
+          <Button>Users</Button>
           <Button>Sign up</Button>
         </NavBtns>
       </Conteiner>
