@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { TeamListItem } from '../TeamListItem/TeamListItem';
 import { Section, Conteiner, Title, List, Btn } from './TeamList.styled';
 import { getUsers } from '../../utils/getUsers';
@@ -8,13 +8,13 @@ export const TeamList = ({ isNewUser, setIsNewUser }) => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [isShowMore, setIsShowMore] = useState(true);
-  const isFirsRender = useRef(true);
+  // const isFirsRender = useRef(true);
 
   useEffect(() => {
-    if (isFirsRender.current) {
-      isFirsRender.current = false;
-      return;
-    }
+    // if (isFirsRender.current) {
+    //   isFirsRender.current = false;
+    //   return;
+    // }
     try {
       getUsers(page).then(res => {
         setUsers(state => [...state, ...res.users]);
