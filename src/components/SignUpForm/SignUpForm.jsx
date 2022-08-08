@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { Button } from '../Button/Button';
 import { getToken } from '../../utils/getToken';
 import { postUser } from '../../utils/postUser';
 import { getPosition } from '../../utils/getPosinions';
@@ -9,9 +10,14 @@ import {
   PhoneBox,
   PhoneLabel,
   PositionText,
+  RadiosWrap,
   Label,
   RadioInput,
   CheckMark,
+  UploadInput,
+  UploadLabel,
+  UploadSpan,
+  BtnWrap,
 } from './SignUpForm.styled';
 
 export const SignUpForm = ({ setIsNewUser }) => {
@@ -63,7 +69,6 @@ export const SignUpForm = ({ setIsNewUser }) => {
         maxLength="60"
       />
       <Input type="email" name="email" placeholder="Email" required />
-
       <PhoneBox>
         <Input
           type="tel"
@@ -76,24 +81,30 @@ export const SignUpForm = ({ setIsNewUser }) => {
         <PhoneLabel htmlFor="phone">+38 (XXX) XXX-XX-XX</PhoneLabel>
       </PhoneBox>
       <PositionText>Select your position</PositionText>
-      {positions.map(({ id, name }) => (
-        <Label key={id}>
-          <RadioInput type="radio" name="position" value={id} />
-          <CheckMark></CheckMark>
-          {name}
-        </Label>
-      ))}
-
-      <label>
-        <input
-          type="file"
-          name="photo"
-          required
-          accept="image/jpeg,image/jpg"
-        />
-        Upload your photo
-      </label>
-      <button type="submit">Sign up</button>
+      <RadiosWrap>
+        {positions.map(({ id, name }) => (
+          <Label key={id}>
+            <RadioInput type="radio" name="position" value={id} />
+            <CheckMark></CheckMark>
+            {name}
+          </Label>
+        ))}
+      </RadiosWrap>
+      <UploadInput
+        type="file"
+        name="photo"
+        id="fileElem"
+        required
+        accept="image/jpeg,image/jpg"
+      />
+      <UploadLabel htmlFor="fileElem">
+        <UploadSpan>Upload</UploadSpan>Upload your photo
+      </UploadLabel>
+      <BtnWrap>
+        <Button disabled={true} type="submit">
+          Sign up
+        </Button>
+      </BtnWrap>
     </From>
   );
 };

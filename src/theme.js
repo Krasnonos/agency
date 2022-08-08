@@ -5,7 +5,7 @@ export const theme = {
     background: '#F8F8F8',
     secondaryBg: '#FFFFFF',
     btnHover: '#FFE302',
-    btnDisabled: 'B4B4B4',
+    btnDisabled: '#B4B4B4',
     mainText: 'rgba(0, 0, 0, 0.87)',
     secondaryText: '#FFFFFF',
   },

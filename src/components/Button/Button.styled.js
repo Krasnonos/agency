@@ -19,6 +19,7 @@ export const Btn = styled.button`
   }
 
   :disabled {
+    color: ${p => p.theme.colors.secondaryText};
     background-color: ${p => p.theme.colors.btnDisabled};
   }
 
