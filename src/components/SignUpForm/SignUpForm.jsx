@@ -3,6 +3,16 @@ import { getToken } from '../../utils/getToken';
 import { postUser } from '../../utils/postUser';
 import { getPosition } from '../../utils/getPosinions';
 import { useState, useEffect } from 'react';
+import {
+  From,
+  Input,
+  PhoneBox,
+  PhoneLabel,
+  PositionText,
+  Label,
+  RadioInput,
+  CheckMark,
+} from './SignUpForm.styled';
 
 export const SignUpForm = ({ setIsNewUser }) => {
   const [positions, setPositions] = useState([]);
@@ -43,8 +53,8 @@ export const SignUpForm = ({ setIsNewUser }) => {
   };
 
   return (
-    <form onSubmit={createPostBody}>
-      <input
+    <From onSubmit={createPostBody}>
+      <Input
         type="text"
         name="name"
         placeholder="Your Name"
@@ -52,23 +62,26 @@ export const SignUpForm = ({ setIsNewUser }) => {
         minLength="2"
         maxLength="60"
       />
-      <input type="email" name="email" placeholder="Email" required />
-      <label>
-        <input
+      <Input type="email" name="email" placeholder="Email" required />
+
+      <PhoneBox>
+        <Input
           type="tel"
           name="phone"
+          id="phone"
           placeholder="Phone"
           required
           pattern="^\+380\d{3}\d{2}\d{2}\d{2}$"
         />
-        +38 (XXX) XXX - XX - XX
-      </label>
-      <p>Select your position</p>
+        <PhoneLabel htmlFor="phone">+38 (XXX) XXX-XX-XX</PhoneLabel>
+      </PhoneBox>
+      <PositionText>Select your position</PositionText>
       {positions.map(({ id, name }) => (
-        <div key={id}>
-          <input type="radio" name="position" value={id} id={name} />
-          <label htmlFor={name}>{name}</label>
-        </div>
+        <Label key={id}>
+          <RadioInput type="radio" name="position" value={id} />
+          <CheckMark></CheckMark>
+          {name}
+        </Label>
       ))}
 
       <label>
@@ -81,6 +94,6 @@ export const SignUpForm = ({ setIsNewUser }) => {
         Upload your photo
       </label>
       <button type="submit">Sign up</button>
-    </form>
+    </From>
   );
 };
